@@ -1,1 +1,26 @@
-1.run,also,let,apply
+1.返回(return@XXX)与跳转
+  条件(if，when)与循环(for)
+2.作用域run,also,let,apply
+      对象引用       返回值           使用场景
+let     it        最后一行代码        判空场景 XX?.let{}
+run     this      最后一行代码
+also    it        返回对象本身        额外的操作，例如获取ab后打印日志
+apply   this      返回对象本身        对bean进行复制操作
+
+注意下面函数定义的返回值差别（Unit代表返回的是上下文对象本身，R代表表达式最后一行）
+以及T.()和(T)的差别：T.()代表接受的是上下文对象本身，使用this来获取属性及方法；(T)代表使用lamda表达式，上下文对象是lamda表达式的参数
+全都是泛型T的扩展函数
+public inline fun <T> T.also(block: (T) -> Unit): T
+public inline fun <T> T.apply(block: T.() -> Unit): T 
+
+public inline fun <T, R> T.let(block: (T) -> R): R
+public inline fun <T, R> T.run(block: T.() -> R): R
+3.类与对象
+  3.1 setter和getter ，以及field字段
+  3.2 密封类(seal class)和密封接口(seal interface)
+     (1)密封类不能被实例化
+  3.3 数据类
+  3.4 in, out, where
+4.函数
+  扩展类型函数
+  T.()->unit的含义：扩展函数类型
