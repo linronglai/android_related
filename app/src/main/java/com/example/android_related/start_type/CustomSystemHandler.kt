@@ -27,7 +27,8 @@ object CustomSystemHandler {
 
     class ActivityThreadHandlerCallback: Handler.Callback {
         override fun handleMessage(msg: Message): Boolean {
-            Log.i(MainTag + "ActivityThreadHandlerCallback", "handleMessage")
+            Log.i(MainTag + "ActivityThreadHandlerCallback",
+                "handleMessage: what = ${msg.what}")
             return false
         }
 

@@ -1,6 +1,7 @@
 package com.example.android_related
 
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.android_related.common.FpsMonitor
+import com.example.android_related.practices.MyReceiver
 import com.example.android_related.practices.MyService
 const val MainTag = "Test."
 class MainActivity : AppCompatActivity() {
@@ -24,13 +26,14 @@ class MainActivity : AppCompatActivity() {
         Log.i(MainTag + TAG, "onCreate")
         val intent = Intent(baseContext, MyService::class.java)
         startService(intent)
+        baseContext.registerReceiver(MyReceiver(), IntentFilter("com.example.test"),
+            RECEIVER_NOT_EXPORTED
+        )
+        sendBroadcast(Intent("com.example.test"))
     }
 
     override fun onResume() {
         super.onResume()
         Log.i(TAG, "onResume")
-        FpsMonitor.startMonitor { counts ->
-            Log.i(MainTag + TAG, "fPS:$counts")
-        }
     }
 }
